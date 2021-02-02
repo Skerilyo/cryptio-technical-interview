@@ -123,7 +123,26 @@ You are welcome to use any third party API. Here are a few ones we recommend:
   You **must** deal with the pagination if you want your application to be
   able to handle large wallets.
 
-## Questions
+## Frequently asked questions
+
+> Is there rate limiting on the Blockchain.com API?
+
+To be honest, I'm not sure. Some candidates reported that they were rate
+limited, and even banned, very quickly, whereas others did not have any issues.
+In case you are limited, I recommend that you stop using the `/rawtx` endpoint
+and use the `/multiaddr` endpoint instead.
+
+> I don't like `ts-standard` (or anything else that is included in the
+boilerplate). Can I change it?
+
+Sure!
+
+> Should I include documentation?
+
+Please, include at least enough documentation for me to be able to launch
+your project locally easily. Everything else is a bonus.
+
+## Need help?
 
 Do not hesitate to ask for more hints or even some help!
 
