@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react'
+import HistoricalBalanceC from './components/HistoricalBalance'
 
 function App (): JSX.Element {
   const [address, setAddress] = useState('')
@@ -27,7 +28,7 @@ function App (): JSX.Element {
 
       {
         address !== ''
-          ? <p>Historical balances for address <code>{address}</code> should appear here...</p>
+          ? <HistoricalBalanceC addr={address} page={0}/>
           : <p>There is no address...</p>
       }
 
