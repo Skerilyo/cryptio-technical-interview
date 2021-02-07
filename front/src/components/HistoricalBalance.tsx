@@ -1,6 +1,17 @@
 import React, { Component } from 'react'
 import TransactionC from './Transaction'
 
+import Paper from '@material-ui/core/Paper';
+import {
+  Chart,
+  BarSeries,
+  Title,
+  ArgumentAxis,
+  ValueAxis,
+} from '@devexpress/dx-react-chart-material-ui';
+
+import { Animation } from '@devexpress/dx-react-chart';
+
 interface Input {
     addr: string,
     page: number
@@ -42,6 +53,16 @@ class HistoricalBalanceC extends Component<Input, HistoricalBalance> {
           .then(data => this.setState({ transactions: data }));
       }
 
+    getChartTab() : any[] {
+        let data: any[] = []
+        if (this.state.transactions != undefined) {
+            for (let i = 0; i < this.state.transactions.txs.length; i++) {
+                data.push({balance: this.state.transactions.txs[i].balanceOut, timestamp: (new Date(this.state.transactions.txs[i].timestamp * 1000)).toLocaleString('fr-FR').split(' ')[0]})
+            }
+        }
+        return data
+    }
+
     render() {
         const { addr, page, transactions } = this.state;
      
@@ -49,11 +70,27 @@ class HistoricalBalanceC extends Component<Input, HistoricalBalance> {
             <div>
                 <div>Historical Balance for address: {addr}</div>
                 <div>Final Balance: {transactions?.finalBalance}</div>
-                <ul>
+
+                {/* <ul>
                     {transactions?.txs.map(item => (
                         <li key={item.timestamp}><TransactionC balanceIn={item.balanceIn} balanceOut={item.balanceOut} timestamp={item.timestamp}/></li>
                     ))}
-                </ul>
+                </ul> */}
+                <Paper>
+                    <Chart
+                        data={this.getChartTab()}
+                    >
+                    <ArgumentAxis />
+                    <ValueAxis />
+
+                    <BarSeries
+                        valueField="balance"
+                        argumentField="timestamp"
+                    />
+                    <Title text="Historical Balance" />
+                    <Animation />
+                    </Chart>
+                </Paper>
             </div>
         );
     }

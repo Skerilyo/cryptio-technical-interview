@@ -38,7 +38,7 @@ app.get('/getBalance',  (req, res) => {
       if (result.n_tx > 50) {
         page += 1  
         while (result.n_tx - 50 * (page) > 0) {
-          delay(300)
+          delay(2000)
           let tmp = await axios.get(`https://blockchain.info/rawaddr/${addr}?offset=${50 * page}`).then((resultp) => resultp.data).then((resultp) => {
             return resultp.txs
           }).catch((e)=> {

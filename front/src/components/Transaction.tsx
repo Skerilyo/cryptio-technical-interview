@@ -22,7 +22,7 @@ export class TransactionC extends Component<Transaction, Transaction> {
      
         return (
             <li style={{padding: 20}}>
-                {balanceOut} at date: {new Date(timestamp*1000).toString()}
+                {balanceOut} at date: {new Date(timestamp*1000).toLocaleString('fr-FR', { timeZone: 'UTC' })}
             </li>
         );
     }
